@@ -1,0 +1,29 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/mcteam4
+    username: mcteam4
+    password: 123123
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+
+server:
+  error:
+    include-message: always
+    include-binding-error: always
+  forward-headers-strategy: framework
+  servlet:
+    context-path: /
+
+logging:
+  pattern:
+    console: "%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"
+  level:
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+
+springdoc:
+  swagger-ui:
+    operationsSorter: method
+    tagsSorter: alpha
