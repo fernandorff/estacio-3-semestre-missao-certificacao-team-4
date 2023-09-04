@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.estacio.team4</groupId>
-    <artifactId>API - Team 4</artifactId>
+    <artifactId>API</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>Missao Certificacao Team 4</name>
     <description>Missao Certificacao Team 4</description>
