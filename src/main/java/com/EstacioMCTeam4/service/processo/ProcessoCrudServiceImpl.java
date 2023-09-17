@@ -2,11 +2,16 @@ package com.EstacioMCTeam4.service.processo;
 
 import com.EstacioMCTeam4.controller.processo.ProcessoRequest;
 import com.EstacioMCTeam4.controller.processo.ProcessoResponse;
+import com.EstacioMCTeam4.entity.Parte;
 import com.EstacioMCTeam4.entity.Processo;
 import com.EstacioMCTeam4.mapper.ProcessoMapper;
 import com.EstacioMCTeam4.repository.ProcessoRepository;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import com.EstacioMCTeam4.service.parte.ParteHelper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +23,8 @@ public class ProcessoCrudServiceImpl implements ProcessoCrudService {
   private final ProcessoRepository processoRepository;
 
   private final ProcessoHelper processoHelper;
+
+  private final ParteHelper parteHelper;
 
   @Transactional
   public List<ProcessoResponse> list() {
@@ -64,5 +71,15 @@ public class ProcessoCrudServiceImpl implements ProcessoCrudService {
     processoRepository.deleteById(id);
 
     return ProcessoMapper.toResponse(processo);
+  }
+
+  @Transactional
+  public ProcessoResponse addPartes(Long id, List<Long> parteIds) {
+
+    List<Parte> partes = new ArrayList<>();
+
+//    parteIds.stream().map()
+
+    return null;
   }
 }

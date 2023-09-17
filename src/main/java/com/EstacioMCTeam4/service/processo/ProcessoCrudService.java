@@ -15,4 +15,6 @@ public interface ProcessoCrudService {
   ProcessoResponse update(Long id, ProcessoRequest request);
 
   ProcessoResponse delete(Long id);
+
+  ProcessoResponse addPartes(Long id, List<Long> parteIds);
 }

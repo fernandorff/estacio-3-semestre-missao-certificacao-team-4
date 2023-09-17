@@ -2,11 +2,14 @@ package com.EstacioMCTeam4.service.parte;
 
 import com.EstacioMCTeam4.controller.parte.ParteRequest;
 import com.EstacioMCTeam4.controller.parte.ParteResponse;
+import com.EstacioMCTeam4.entity.EnderecoBaseCep;
 import com.EstacioMCTeam4.entity.Parte;
 import com.EstacioMCTeam4.mapper.ParteMapper;
 import com.EstacioMCTeam4.repository.ParteRepository;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import com.EstacioMCTeam4.service.enderecoBaseCep.EnderecoBaseCepService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +21,8 @@ public class ParteCrudServiceImpl implements ParteCrudService {
   private final ParteRepository parteRepository;
 
   private final ParteHelper parteHelper;
+
+  private final EnderecoBaseCepService enderecoBaseCepService;
 
   @Transactional
   public List<ParteResponse> list() {
@@ -39,6 +44,10 @@ public class ParteCrudServiceImpl implements ParteCrudService {
   public ParteResponse create(ParteRequest request) {
 
     Parte parte = ParteMapper.toEntity(request);
+
+    EnderecoBaseCep enderecoBaseCep = enderecoBaseCepService.findOrCreateEnderecoBaseCepByCep(request.getCep());
+
+    parte.setEnderecoBaseCep(enderecoBaseCep);
 
     parteRepository.save(parte);
 

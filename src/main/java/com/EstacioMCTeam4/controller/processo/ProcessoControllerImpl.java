@@ -58,4 +58,13 @@ public class ProcessoControllerImpl implements ProcessoController {
 
     return procesoCrudService.delete(id);
   }
+
+  @PutMapping("/{id}/partes")
+  @Operation(summary = "Adicionar partes a um processo", method = "PUT")
+  @ResponseStatus(HttpStatus.CREATED)
+  public ProcessoResponse addPartes(
+      @PathVariable("id") Long processoId, @RequestParam("parteIds") List<Long> parteIds) {
+
+    return procesoCrudService.addPartes(processoId, parteIds);
+  }
 }

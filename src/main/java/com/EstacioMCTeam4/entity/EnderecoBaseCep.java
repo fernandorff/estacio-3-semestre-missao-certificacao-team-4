@@ -2,6 +2,7 @@ package com.EstacioMCTeam4.entity;
 
 import jakarta.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import lombok.EqualsAndHashCode;
@@ -30,7 +31,7 @@ public class EnderecoBaseCep {
 
   private String estado;
 
-  private LocalDate dataCriacao = LocalDate.now();
+  private LocalDateTime dataHoraCriacao = LocalDateTime.now();
 
   @OneToMany(mappedBy = "enderecoBaseCep", cascade = CascadeType.ALL)
   private List<Parte> partes;
