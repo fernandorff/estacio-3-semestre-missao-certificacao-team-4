@@ -1,4 +1,4 @@
-package com.EstacioMCTeam4.controller.dto.request;
+package com.EstacioMCTeam4.controller.notificacao;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;

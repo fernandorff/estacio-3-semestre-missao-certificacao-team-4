@@ -1,7 +1,10 @@
 package com.EstacioMCTeam4.entity;
 
 import jakarta.persistence.*;
+import java.time.LocalDateTime;
 import java.util.List;
+
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -9,8 +12,8 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString(of = "id")
+@EqualsAndHashCode(of = "id")
 @Entity
-@Table(name = "parte")
 public class Parte {
 
   @Id
@@ -23,20 +26,16 @@ public class Parte {
 
   private String email;
 
-  private String cep;
+  private String numeroEndereco;
 
-  private String numeroRua;
+  private String complementoEndereco;
 
-  private String nomeRua;
+  @ManyToOne() private EnderecoBaseCep enderecoBaseCep;
 
-  private String bairro;
-
-  private String cidade;
-
-  private String estado;
+  @ManyToOne() private Processo processo;
 
   @OneToMany(mappedBy = "parte", cascade = CascadeType.ALL)
   private List<Notificacao> notificacoes;
 
-  @ManyToOne() private Processo processo;
+  private LocalDateTime dataHoraCriacao = LocalDateTime.now();
 }

@@ -1,6 +1,8 @@
 package com.EstacioMCTeam4.entity;
 
 import jakarta.persistence.*;
+import java.time.LocalDateTime;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -8,8 +10,8 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString(of = "id")
+@EqualsAndHashCode(of = "id")
 @Entity
-@Table(name = "notificacao")
 public class Notificacao {
 
   @Id
@@ -18,7 +20,9 @@ public class Notificacao {
 
   private Boolean notificado;
 
+  private TipoNotificacao tipoNotificacao;
+
   @ManyToOne private Parte parte;
 
-  @ManyToOne private Processo processo;
+  private LocalDateTime dataHoraCriacao = LocalDateTime.now();
 }

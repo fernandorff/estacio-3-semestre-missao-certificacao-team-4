@@ -1,5 +1,6 @@
-package com.EstacioMCTeam4.controller.dto.response;
+package com.EstacioMCTeam4.controller.notificacao;
 
+import java.time.LocalDateTime;
 import lombok.*;
 
 @NoArgsConstructor
@@ -16,4 +17,6 @@ public class NotificacaoResponse {
   private Long parteId;
 
   private Long processoId;
+
+  private LocalDateTime dataHoraCriacao;
 }
