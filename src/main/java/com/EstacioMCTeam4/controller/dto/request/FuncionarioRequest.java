@@ -1,4 +1,4 @@
-package com.EstacioMCTeam4.controller.dto.request.funcionario;
+package com.EstacioMCTeam4.controller.dto.request;
 
 import com.EstacioMCTeam4.entity.enums.Cargo;
 import jakarta.validation.constraints.NotBlank;

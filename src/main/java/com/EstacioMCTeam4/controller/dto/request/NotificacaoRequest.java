@@ -1,13 +1,11 @@
-package com.EstacioMCTeam4.controller.dto.request.notificacao;
-
-// import com.MissaoCertificacaoTeam4.entity.enums.Cargo;
+package com.EstacioMCTeam4.controller.dto.request;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 
 @Getter
-public class IncluirNotificacaoRequest {
+public class NotificacaoRequest {
 
   @NotBlank(message = "O campo nome não pode estar vazio.")
   private String nomeCompleto;

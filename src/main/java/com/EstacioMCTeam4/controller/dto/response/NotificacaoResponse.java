@@ -1,4 +1,4 @@
-package com.EstacioMCTeam4.controller.dto.response.notificacao;
+package com.EstacioMCTeam4.controller.dto.response;
 
 import lombok.*;
 

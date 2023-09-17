@@ -1,7 +1,7 @@
 package com.EstacioMCTeam4.controller;
 
-import com.EstacioMCTeam4.controller.dto.request.funcionario.FuncionarioRequest;
-import com.EstacioMCTeam4.controller.dto.response.funcionario.FuncionarioResponse;
+import com.EstacioMCTeam4.controller.dto.request.FuncionarioRequest;
+import com.EstacioMCTeam4.controller.dto.response.FuncionarioResponse;
 import com.EstacioMCTeam4.service.funcionario.FuncionarioCrudService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

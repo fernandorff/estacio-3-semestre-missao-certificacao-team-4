@@ -2,8 +2,8 @@ package com.EstacioMCTeam4.service.funcionario;
 
 import static com.EstacioMCTeam4.mapper.FuncionarioMapper.criarFuncionarioResponse;
 
-import com.EstacioMCTeam4.controller.dto.request.funcionario.FuncionarioRequest;
-import com.EstacioMCTeam4.controller.dto.response.funcionario.FuncionarioResponse;
+import com.EstacioMCTeam4.controller.dto.request.FuncionarioRequest;
+import com.EstacioMCTeam4.controller.dto.response.FuncionarioResponse;
 import com.EstacioMCTeam4.entity.Funcionario;
 import com.EstacioMCTeam4.mapper.FuncionarioMapper;
 import com.EstacioMCTeam4.repository.FuncionarioRepository;

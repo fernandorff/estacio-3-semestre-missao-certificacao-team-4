@@ -1,7 +1,7 @@
 package com.EstacioMCTeam4.service.funcionario;
 
-import com.EstacioMCTeam4.controller.dto.request.funcionario.FuncionarioRequest;
-import com.EstacioMCTeam4.controller.dto.response.funcionario.FuncionarioResponse;
+import com.EstacioMCTeam4.controller.dto.request.FuncionarioRequest;
+import com.EstacioMCTeam4.controller.dto.response.FuncionarioResponse;
 import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

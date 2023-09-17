@@ -1,7 +1,7 @@
 package com.EstacioMCTeam4.mapper;
 
-import com.EstacioMCTeam4.controller.dto.request.funcionario.FuncionarioRequest;
-import com.EstacioMCTeam4.controller.dto.response.funcionario.FuncionarioResponse;
+import com.EstacioMCTeam4.controller.dto.request.FuncionarioRequest;
+import com.EstacioMCTeam4.controller.dto.response.FuncionarioResponse;
 import com.EstacioMCTeam4.entity.Funcionario;
 
 public class FuncionarioMapper {

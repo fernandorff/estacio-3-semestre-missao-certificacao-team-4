@@ -1,4 +1,4 @@
-package com.EstacioMCTeam4.controller.dto.response.funcionario;
+package com.EstacioMCTeam4.controller.dto.response;
 
 import com.EstacioMCTeam4.entity.enums.Cargo;
 import java.math.BigDecimal;
