@@ -6,12 +6,11 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
 
 server:
   error:
     include-message: always
-    include-binding-error: always
   forward-headers-strategy: framework
   servlet:
     context-path: /
