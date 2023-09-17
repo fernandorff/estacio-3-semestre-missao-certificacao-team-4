@@ -6,10 +6,9 @@ import com.EstacioMCTeam4.entity.EnderecoBaseCep;
 import com.EstacioMCTeam4.entity.Parte;
 import com.EstacioMCTeam4.mapper.ParteMapper;
 import com.EstacioMCTeam4.repository.ParteRepository;
-import java.util.List;
-import java.util.stream.Collectors;
-
 import com.EstacioMCTeam4.service.enderecoBaseCep.EnderecoBaseCepService;
+import java.util.Set;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,11 +24,11 @@ public class ParteCrudServiceImpl implements ParteCrudService {
   private final EnderecoBaseCepService enderecoBaseCepService;
 
   @Transactional
-  public List<ParteResponse> list() {
+  public Set<ParteResponse> list() {
 
     return parteRepository.findAll().stream()
-        .map(ParteMapper::toResponse)
-        .collect(Collectors.toList());
+        .map((Parte parte) -> ParteMapper.toResponse(parte, true))
+        .collect(Collectors.toSet());
   }
 
   @Transactional
@@ -37,7 +36,7 @@ public class ParteCrudServiceImpl implements ParteCrudService {
 
     Parte parte = parteHelper.returnValidParteById(id);
 
-    return ParteMapper.toResponse(parte);
+    return ParteMapper.toResponse(parte, true);
   }
 
   @Transactional
@@ -45,13 +44,14 @@ public class ParteCrudServiceImpl implements ParteCrudService {
 
     Parte parte = ParteMapper.toEntity(request);
 
-    EnderecoBaseCep enderecoBaseCep = enderecoBaseCepService.findOrCreateEnderecoBaseCepByCep(request.getCep());
+    EnderecoBaseCep enderecoBaseCep =
+        enderecoBaseCepService.findOrCreateEnderecoBaseCepByCep(request.getCep());
 
     parte.setEnderecoBaseCep(enderecoBaseCep);
 
     parteRepository.save(parte);
 
-    return ParteMapper.toResponse(parte);
+    return ParteMapper.toResponse(parte, true);
   }
 
   @Transactional
@@ -63,7 +63,7 @@ public class ParteCrudServiceImpl implements ParteCrudService {
 
     parteRepository.save(parte);
 
-    return ParteMapper.toResponse(parte);
+    return ParteMapper.toResponse(parte, true);
   }
 
   @Transactional
@@ -73,6 +73,6 @@ public class ParteCrudServiceImpl implements ParteCrudService {
 
     parteRepository.deleteById(id);
 
-    return ParteMapper.toResponse(parte);
+    return ParteMapper.toResponse(parte, true);
   }
 }

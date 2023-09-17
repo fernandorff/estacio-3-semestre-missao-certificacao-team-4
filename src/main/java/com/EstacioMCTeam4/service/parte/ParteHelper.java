@@ -20,4 +20,19 @@ public class ParteHelper {
         .orElseThrow(
             () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Parte não encontrada"));
   }
+
+  public Parte returnValidParteSemProcessoById(Long id) {
+
+    Parte parte =
+        processoRepository
+            .findById(id)
+            .orElseThrow(
+                () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Parte não encontrada"));
+
+    if (parte.getProcesso() != null) {
+      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Parte já está em um processo");
+    } else {
+      return parte;
+    }
+  }
 }

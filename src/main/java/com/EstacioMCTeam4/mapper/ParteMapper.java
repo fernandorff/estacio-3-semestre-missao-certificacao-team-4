@@ -25,7 +25,7 @@ public class ParteMapper {
     entity.setComplementoEndereco(request.getComplementoEndereco());
   }
 
-  public static ParteResponse toResponse(Parte entity) {
+  public static ParteResponse toResponse(Parte entity, boolean mapProcesso) {
 
     if (entity == null) {
       return null;
@@ -40,8 +40,10 @@ public class ParteMapper {
     response.setNumeroEndereco(entity.getNumeroEndereco());
     response.setComplementoEndereco(entity.getComplementoEndereco());
 
-    ProcessoResponse processoResponse = ProcessoMapper.toResponse(entity.getProcesso());
-    response.setProcesso(processoResponse);
+    if (mapProcesso) {
+      ProcessoResponse processoResponse = ProcessoMapper.toResponse(entity.getProcesso(), false);
+      response.setProcesso(processoResponse);
+    }
 
     response.setEnderecoBaseCEP(entity.getEnderecoBaseCep());
     response.setDataHoraCriacao(entity.getDataHoraCriacao());

@@ -4,7 +4,7 @@ import com.EstacioMCTeam4.service.processo.ProcessoCrudService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
-import java.util.List;
+import java.util.Set;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -29,7 +29,7 @@ public class ProcessoControllerImpl implements ProcessoController {
   @GetMapping
   @Operation(summary = "Listar processos", method = "GET")
   @ResponseStatus(HttpStatus.OK)
-  public List<ProcessoResponse> list() {
+  public Set<ProcessoResponse> list() {
 
     return procesoCrudService.list();
   }
@@ -63,7 +63,7 @@ public class ProcessoControllerImpl implements ProcessoController {
   @Operation(summary = "Adicionar partes a um processo", method = "PUT")
   @ResponseStatus(HttpStatus.CREATED)
   public ProcessoResponse addPartes(
-      @PathVariable("id") Long processoId, @RequestParam("parteIds") List<Long> parteIds) {
+      @PathVariable("id") Long processoId, @RequestBody Set<Long> parteIds) {
 
     return procesoCrudService.addPartes(processoId, parteIds);
   }

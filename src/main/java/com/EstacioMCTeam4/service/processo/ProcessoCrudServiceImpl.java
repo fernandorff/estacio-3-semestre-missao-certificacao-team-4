@@ -6,12 +6,10 @@ import com.EstacioMCTeam4.entity.Parte;
 import com.EstacioMCTeam4.entity.Processo;
 import com.EstacioMCTeam4.mapper.ProcessoMapper;
 import com.EstacioMCTeam4.repository.ProcessoRepository;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-
 import com.EstacioMCTeam4.service.parte.ParteHelper;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,18 +25,18 @@ public class ProcessoCrudServiceImpl implements ProcessoCrudService {
   private final ParteHelper parteHelper;
 
   @Transactional
-  public List<ProcessoResponse> list() {
+  public Set<ProcessoResponse> list() {
 
     return processoRepository.findAll().stream()
-        .map(ProcessoMapper::toResponse)
-        .collect(Collectors.toList());
+        .map((Processo processo) -> ProcessoMapper.toResponse(processo, true))
+        .collect(Collectors.toSet());
   }
 
   @Transactional
   public ProcessoResponse getById(Long id) {
 
     Processo processo = processoHelper.returnValidProcessoById(id);
-    return ProcessoMapper.toResponse(processo);
+    return ProcessoMapper.toResponse(processo, true);
   }
 
   @Transactional
@@ -48,7 +46,7 @@ public class ProcessoCrudServiceImpl implements ProcessoCrudService {
 
     processoRepository.save(processo);
 
-    return ProcessoMapper.toResponse(processo);
+    return ProcessoMapper.toResponse(processo, true);
   }
 
   @Transactional
@@ -60,7 +58,7 @@ public class ProcessoCrudServiceImpl implements ProcessoCrudService {
 
     processoRepository.save(processo);
 
-    return ProcessoMapper.toResponse(processo);
+    return ProcessoMapper.toResponse(processo, true);
   }
 
   @Transactional
@@ -70,16 +68,27 @@ public class ProcessoCrudServiceImpl implements ProcessoCrudService {
 
     processoRepository.deleteById(id);
 
-    return ProcessoMapper.toResponse(processo);
+    return ProcessoMapper.toResponse(processo, true);
   }
 
   @Transactional
-  public ProcessoResponse addPartes(Long id, List<Long> parteIds) {
+  public ProcessoResponse addPartes(Long id, Set<Long> parteIds) {
 
-    List<Parte> partes = new ArrayList<>();
+    Processo processo = processoHelper.returnValidProcessoById(id);
 
-//    parteIds.stream().map()
+    Set<Parte> partes = new HashSet<>();
 
-    return null;
+    parteIds.forEach(
+        parteId -> {
+          Parte parte = parteHelper.returnValidParteSemProcessoById(parteId);
+          parte.setProcesso(processo);
+          partes.add(parte);
+        });
+
+    processo.getPartes().addAll(partes);
+
+    processoRepository.save(processo);
+
+    return ProcessoMapper.toResponse(processo, true);
   }
 }

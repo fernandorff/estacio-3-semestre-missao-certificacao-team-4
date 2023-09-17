@@ -3,7 +3,6 @@ package com.EstacioMCTeam4.service.enderecoBaseCep;
 import com.EstacioMCTeam4.entity.EnderecoBaseCep;
 import com.EstacioMCTeam4.repository.EnderecoBaseCepRepository;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.annotations.NotFound;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -13,10 +12,9 @@ import org.springframework.web.server.ResponseStatusException;
 @Service
 public class EnderecoBaseCepServiceImpl implements EnderecoBaseCepService {
 
-  private final RestTemplate restTemplate;
-
-  private final EnderecoBaseCepRepository enderecoBaseCepRepository;
   private static final String VIA_CEP_URL = "https://viacep.com.br/ws/";
+  private final RestTemplate restTemplate;
+  private final EnderecoBaseCepRepository enderecoBaseCepRepository;
 
   @Override
   public EnderecoBaseCep findOrCreateEnderecoBaseCepByCep(String cep) {
@@ -38,7 +36,8 @@ public class EnderecoBaseCepServiceImpl implements EnderecoBaseCepService {
         enderecoBaseCepRepository.save(enderecoBaseCep);
 
       } else {
-        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Endereço não encontrado para o CEP: " + cep);
+        throw new ResponseStatusException(
+            HttpStatus.NOT_FOUND, "Endereço não encontrado para o CEP: " + cep);
       }
     }
 

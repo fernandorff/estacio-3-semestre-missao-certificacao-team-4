@@ -3,7 +3,7 @@ package com.EstacioMCTeam4.controller.processo;
 import com.EstacioMCTeam4.controller.parte.ParteResponse;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.Set;
 import lombok.*;
 
 @NoArgsConstructor
@@ -18,7 +18,7 @@ public class ProcessoResponse {
   private String numero;
 
   @JsonIgnoreProperties({"processo"})
-  private List<ParteResponse> partes;
+  private Set<ParteResponse> partes;
 
   private LocalDateTime dataHoraCriacao;
 }

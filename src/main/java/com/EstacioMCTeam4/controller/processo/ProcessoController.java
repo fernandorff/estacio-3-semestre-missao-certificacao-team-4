@@ -1,22 +1,18 @@
 package com.EstacioMCTeam4.controller.processo;
 
-import jakarta.validation.Valid;
-import java.util.List;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
+import java.util.Set;
 
 public interface ProcessoController {
 
-  ProcessoResponse create(@Valid @RequestBody ProcessoRequest request);
+  ProcessoResponse create(ProcessoRequest request);
 
-  List<ProcessoResponse> list();
+  Set<ProcessoResponse> list();
 
-  ProcessoResponse getById(@PathVariable Long id);
+  ProcessoResponse getById(Long id);
 
-  ProcessoResponse update(@PathVariable Long id, @Valid @RequestBody ProcessoRequest request);
+  ProcessoResponse update(Long id, ProcessoRequest request);
 
-  ProcessoResponse delete(@PathVariable Long id);
+  ProcessoResponse delete(Long id);
 
-  public ProcessoResponse addPartes(@PathVariable("id") Long processoId, @RequestParam("parteIds") List<Long> parteIds);
+  ProcessoResponse addPartes(Long processoId, Set<Long> parteIds);
 }

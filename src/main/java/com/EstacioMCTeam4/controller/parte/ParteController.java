@@ -1,19 +1,16 @@
 package com.EstacioMCTeam4.controller.parte;
 
-import jakarta.validation.Valid;
-import java.util.List;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
+import java.util.Set;
 
 public interface ParteController {
 
-  ParteResponse create(@Valid @RequestBody ParteRequest request);
+  ParteResponse create(ParteRequest request);
 
-  List<ParteResponse> list();
+  Set<ParteResponse> list();
 
-  ParteResponse getById(@PathVariable Long id);
+  ParteResponse getById(Long id);
 
-  ParteResponse update(@PathVariable Long id, @Valid @RequestBody ParteRequest request);
+  ParteResponse update(Long id, ParteRequest request);
 
-  ParteResponse delete(@PathVariable Long id);
+  ParteResponse delete(Long id);
 }

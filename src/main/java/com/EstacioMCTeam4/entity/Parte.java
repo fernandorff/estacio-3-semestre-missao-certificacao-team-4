@@ -2,8 +2,7 @@ package com.EstacioMCTeam4.entity;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
-import java.util.List;
-
+import java.util.Set;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -35,7 +34,7 @@ public class Parte {
   @ManyToOne() private Processo processo;
 
   @OneToMany(mappedBy = "parte", cascade = CascadeType.ALL)
-  private List<Notificacao> notificacoes;
+  private Set<Notificacao> notificacoes;
 
   private LocalDateTime dataHoraCriacao = LocalDateTime.now();
 }

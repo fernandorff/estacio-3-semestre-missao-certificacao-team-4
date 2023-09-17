@@ -2,11 +2,11 @@ package com.EstacioMCTeam4.service.processo;
 
 import com.EstacioMCTeam4.controller.processo.ProcessoRequest;
 import com.EstacioMCTeam4.controller.processo.ProcessoResponse;
-import java.util.List;
+import java.util.Set;
 
 public interface ProcessoCrudService {
 
-  List<ProcessoResponse> list();
+  Set<ProcessoResponse> list();
 
   ProcessoResponse getById(Long id);
 
@@ -16,5 +16,5 @@ public interface ProcessoCrudService {
 
   ProcessoResponse delete(Long id);
 
-  ProcessoResponse addPartes(Long id, List<Long> parteIds);
+  ProcessoResponse addPartes(Long id, Set<Long> parteIds);
 }

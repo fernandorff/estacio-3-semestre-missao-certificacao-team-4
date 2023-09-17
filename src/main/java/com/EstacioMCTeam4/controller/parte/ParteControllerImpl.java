@@ -4,7 +4,7 @@ import com.EstacioMCTeam4.service.parte.ParteCrudService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
-import java.util.List;
+import java.util.Set;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -29,7 +29,7 @@ public class ParteControllerImpl implements ParteController {
   @GetMapping
   @Operation(summary = "Listar partes", method = "GET")
   @ResponseStatus(HttpStatus.OK)
-  public List<ParteResponse> list() {
+  public Set<ParteResponse> list() {
 
     return parteCrudService.list();
   }
