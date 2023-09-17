@@ -1,5 +1,6 @@
 package com.EstacioMCTeam4.entity;
 
+import com.EstacioMCTeam4.entity.enums.TipoNotificacao;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import lombok.EqualsAndHashCode;
