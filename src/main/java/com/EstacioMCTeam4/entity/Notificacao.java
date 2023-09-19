@@ -2,11 +2,12 @@ package com.EstacioMCTeam4.entity;
 
 import com.EstacioMCTeam4.entity.enums.TipoNotificacao;
 import jakarta.persistence.*;
-import java.time.LocalDateTime;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -15,15 +16,16 @@ import lombok.ToString;
 @Entity
 public class Notificacao {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-  private Boolean notificado;
+    private Boolean notificado;
 
-  private TipoNotificacao tipoNotificacao;
+    private TipoNotificacao tipoNotificacao;
 
-  @ManyToOne private Parte parte;
+    @ManyToOne
+    private Parte parte;
 
-  private LocalDateTime dataHoraCriacao = LocalDateTime.now();
+    private LocalDateTime dataHoraCriacao = LocalDateTime.now();
 }

@@ -4,15 +4,17 @@ import java.util.Set;
 
 public interface ProcessoController {
 
-  ProcessoResponse create(ProcessoRequest request);
+    ProcessoResponse create(ProcessoRequest request);
 
-  Set<ProcessoResponse> list();
+    Set<ProcessoResponse> list();
 
-  ProcessoResponse getById(Long id);
+    ProcessoResponse getById(Long id);
 
-  ProcessoResponse update(Long id, ProcessoRequest request);
+    ProcessoResponse update(Long id, ProcessoRequest request);
 
-  ProcessoResponse delete(Long id);
+    ProcessoResponse delete(Long id);
 
-  ProcessoResponse addPartes(Long processoId, Set<Long> parteIds);
+    ProcessoResponse addPartes(Long processoId, Set<Long> parteIds);
+
+    ProcessoResponse notificarPartes(Long processoId);
 }

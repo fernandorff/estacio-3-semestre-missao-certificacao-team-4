@@ -7,72 +7,73 @@ import com.EstacioMCTeam4.entity.Parte;
 import com.EstacioMCTeam4.mapper.ParteMapper;
 import com.EstacioMCTeam4.repository.ParteRepository;
 import com.EstacioMCTeam4.service.enderecoBaseCep.EnderecoBaseCepService;
-import java.util.Set;
-import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class ParteCrudServiceImpl implements ParteCrudService {
 
-  private final ParteRepository parteRepository;
+    private final ParteRepository parteRepository;
 
-  private final ParteHelper parteHelper;
+    private final ParteHelper parteHelper;
 
-  private final EnderecoBaseCepService enderecoBaseCepService;
+    private final EnderecoBaseCepService enderecoBaseCepService;
 
-  @Transactional
-  public Set<ParteResponse> list() {
+    @Transactional
+    public Set<ParteResponse> list() {
 
-    return parteRepository.findAll().stream()
-        .map((Parte parte) -> ParteMapper.toResponse(parte, true))
-        .collect(Collectors.toSet());
-  }
+        return parteRepository.findAll().stream()
+                .map((Parte parte) -> ParteMapper.toResponse(parte, true))
+                .collect(Collectors.toSet());
+    }
 
-  @Transactional
-  public ParteResponse getById(Long id) {
+    @Transactional
+    public ParteResponse getById(Long id) {
 
-    Parte parte = parteHelper.returnValidParteById(id);
+        Parte parte = parteHelper.returnValidParteById(id);
 
-    return ParteMapper.toResponse(parte, true);
-  }
+        return ParteMapper.toResponse(parte, true);
+    }
 
-  @Transactional
-  public ParteResponse create(ParteRequest request) {
+    @Transactional
+    public ParteResponse create(ParteRequest request) {
 
-    Parte parte = ParteMapper.toEntity(request);
+        Parte parte = ParteMapper.toEntity(request);
 
-    EnderecoBaseCep enderecoBaseCep =
-        enderecoBaseCepService.findOrCreateEnderecoBaseCepByCep(request.getCep());
+        EnderecoBaseCep enderecoBaseCep =
+                enderecoBaseCepService.findOrCreateEnderecoBaseCepByCep(request.getCep());
 
-    parte.setEnderecoBaseCep(enderecoBaseCep);
+        parte.setEnderecoBaseCep(enderecoBaseCep);
 
-    parteRepository.save(parte);
+        parteRepository.save(parte);
 
-    return ParteMapper.toResponse(parte, true);
-  }
+        return ParteMapper.toResponse(parte, true);
+    }
 
-  @Transactional
-  public ParteResponse update(Long id, ParteRequest request) {
+    @Transactional
+    public ParteResponse update(Long id, ParteRequest request) {
 
-    Parte parte = parteHelper.returnValidParteById(id);
+        Parte parte = parteHelper.returnValidParteById(id);
 
-    ParteMapper.updateEntity(parte, request);
+        ParteMapper.updateEntity(parte, request);
 
-    parteRepository.save(parte);
+        parteRepository.save(parte);
 
-    return ParteMapper.toResponse(parte, true);
-  }
+        return ParteMapper.toResponse(parte, true);
+    }
 
-  @Transactional
-  public ParteResponse delete(Long id) {
+    @Transactional
+    public ParteResponse delete(Long id) {
 
-    Parte parte = parteHelper.returnValidParteById(id);
+        Parte parte = parteHelper.returnValidParteById(id);
 
-    parteRepository.deleteById(id);
+        parteRepository.deleteById(id);
 
-    return ParteMapper.toResponse(parte, true);
-  }
+        return ParteMapper.toResponse(parte, true);
+    }
 }

@@ -11,13 +11,13 @@ import org.springframework.web.server.ResponseStatusException;
 @RequiredArgsConstructor
 public class ProcessoHelper {
 
-  private final ProcessoRepository processoRepository;
+    private final ProcessoRepository processoRepository;
 
-  public Processo returnValidProcessoById(Long id) {
+    public Processo returnValidProcessoById(Long id) {
 
-    return processoRepository
-        .findById(id)
-        .orElseThrow(
-            () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Processo não encontrado"));
-  }
+        return processoRepository
+                .findById(id)
+                .orElseThrow(
+                        () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Processo não encontrado"));
+    }
 }

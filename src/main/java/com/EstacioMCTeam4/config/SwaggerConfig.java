@@ -10,17 +10,17 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class SwaggerConfig implements WebMvcConfigurer {
 
-  @Bean
-  public OpenAPI swagger() {
+    @Bean
+    public OpenAPI swagger() {
 
-    return new OpenAPI()
-        .info(new Info().title("Missao Certificacao Team 4").description("Estacio").version("1.0"));
-  }
+        return new OpenAPI()
+                .info(new Info().title("Missao Certificacao Team 4").description("Estacio").version("1.0"));
+    }
 
-  @Override
-  public void addViewControllers(final ViewControllerRegistry registry) {
+    @Override
+    public void addViewControllers(final ViewControllerRegistry registry) {
 
-    registry.addRedirectViewController("/", "/swagger-ui.html");
-    registry.addRedirectViewController("/swagger-ui", "/swagger-ui.html");
-  }
+        registry.addRedirectViewController("/", "/swagger-ui.html");
+        registry.addRedirectViewController("/swagger-ui", "/swagger-ui.html");
+    }
 }

@@ -7,47 +7,48 @@ import com.EstacioMCTeam4.entity.Parte;
 
 public class ParteMapper {
 
-  public static Parte toEntity(ParteRequest request) {
+    public static Parte toEntity(ParteRequest request) {
 
-    Parte entity = new Parte();
+        Parte entity = new Parte();
 
-    updateEntity(entity, request);
+        updateEntity(entity, request);
 
-    return entity;
-  }
-
-  public static void updateEntity(Parte entity, ParteRequest request) {
-
-    entity.setNomeCompleto(request.getNomeCompleto());
-    entity.setDocumento(request.getDocumento());
-    entity.setEmail(request.getEmail());
-    entity.setNumeroEndereco(request.getNumeroEndereco());
-    entity.setComplementoEndereco(request.getComplementoEndereco());
-  }
-
-  public static ParteResponse toResponse(Parte entity, boolean mapProcesso) {
-
-    if (entity == null) {
-      return null;
+        return entity;
     }
 
-    ParteResponse response = new ParteResponse();
+    public static void updateEntity(Parte entity, ParteRequest request) {
 
-    response.setId(entity.getId());
-    response.setNomeCompleto(entity.getNomeCompleto());
-    response.setDocumento(entity.getDocumento());
-    response.setEmail(entity.getEmail());
-    response.setNumeroEndereco(entity.getNumeroEndereco());
-    response.setComplementoEndereco(entity.getComplementoEndereco());
-
-    if (mapProcesso) {
-      ProcessoResponse processoResponse = ProcessoMapper.toResponse(entity.getProcesso(), false);
-      response.setProcesso(processoResponse);
+        entity.setNomeCompleto(request.getNomeCompleto());
+        entity.setDocumento(request.getDocumento());
+        entity.setEmail(request.getEmail());
+        entity.setNumeroEndereco(request.getNumeroEndereco());
+        entity.setComplementoEndereco(request.getComplementoEndereco());
     }
 
-    response.setEnderecoBaseCEP(entity.getEnderecoBaseCep());
-    response.setDataHoraCriacao(entity.getDataHoraCriacao());
+    public static ParteResponse toResponse(Parte entity, boolean mapProcesso) {
 
-    return response;
-  }
+        if (entity == null) {
+            return null;
+        }
+
+        ParteResponse response = new ParteResponse();
+
+        response.setId(entity.getId());
+        response.setNomeCompleto(entity.getNomeCompleto());
+        response.setDocumento(entity.getDocumento());
+        response.setEmail(entity.getEmail());
+        response.setNumeroEndereco(entity.getNumeroEndereco());
+        response.setComplementoEndereco(entity.getComplementoEndereco());
+
+        if (mapProcesso && entity.getProcesso() != null) {
+            ProcessoResponse processoResponse = ProcessoMapper.toResponse(entity.getProcesso(), false);
+            response.setProcesso(processoResponse);
+        }
+
+        response.setNotificacoes(entity.getNotificacoes());
+        response.setEnderecoBaseCEP(entity.getEnderecoBaseCep());
+        response.setDataHoraCriacao(entity.getDataHoraCriacao());
+
+        return response;
+    }
 }

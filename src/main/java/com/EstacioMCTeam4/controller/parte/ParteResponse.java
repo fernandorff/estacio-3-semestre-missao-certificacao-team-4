@@ -2,9 +2,12 @@ package com.EstacioMCTeam4.controller.parte;
 
 import com.EstacioMCTeam4.controller.processo.ProcessoResponse;
 import com.EstacioMCTeam4.entity.EnderecoBaseCep;
+import com.EstacioMCTeam4.entity.Notificacao;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import java.time.LocalDateTime;
 import lombok.*;
+
+import java.time.LocalDateTime;
+import java.util.Set;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -13,23 +16,26 @@ import lombok.*;
 @Setter
 public class ParteResponse {
 
-  private Long id;
+    private Long id;
 
-  private String nomeCompleto;
+    private String nomeCompleto;
 
-  private String documento;
+    private String documento;
 
-  private String email;
+    private String email;
 
-  private String numeroEndereco;
+    private String numeroEndereco;
 
-  private String complementoEndereco;
+    private String complementoEndereco;
 
-  @JsonIgnoreProperties({"partes"})
-  private EnderecoBaseCep enderecoBaseCEP;
+    @JsonIgnoreProperties({"partes"})
+    private EnderecoBaseCep enderecoBaseCEP;
 
-  @JsonIgnoreProperties({"partes"})
-  private ProcessoResponse processo;
+    @JsonIgnoreProperties({"partes"})
+    private ProcessoResponse processo;
 
-  private LocalDateTime dataHoraCriacao;
+    @JsonIgnoreProperties({"parte"})
+    private Set<Notificacao> notificacoes;
+
+    private LocalDateTime dataHoraCriacao;
 }

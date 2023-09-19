@@ -6,11 +6,11 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @Getter
 public enum TipoNotificacao {
-  CORREIOS("Correios"),
+    CORREIOS("Correios"),
 
-  EMAIL("E-mail"),
+    EMAIL("E-mail"),
 
-  DJE("Diário da Justiça Eletrônico");
+    DJE("Diário da Justiça Eletrônico");
 
-  private final String value;
+    private final String value;
 }

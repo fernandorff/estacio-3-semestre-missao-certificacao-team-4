@@ -2,19 +2,22 @@ package com.EstacioMCTeam4.service.processo;
 
 import com.EstacioMCTeam4.controller.processo.ProcessoRequest;
 import com.EstacioMCTeam4.controller.processo.ProcessoResponse;
+
 import java.util.Set;
 
-public interface ProcessoCrudService {
+public interface ProcessoService {
 
-  Set<ProcessoResponse> list();
+    Set<ProcessoResponse> list();
 
-  ProcessoResponse getById(Long id);
+    ProcessoResponse getById(Long id);
 
-  ProcessoResponse create(ProcessoRequest request);
+    ProcessoResponse create(ProcessoRequest request);
 
-  ProcessoResponse update(Long id, ProcessoRequest request);
+    ProcessoResponse update(Long id, ProcessoRequest request);
 
-  ProcessoResponse delete(Long id);
+    ProcessoResponse delete(Long id);
 
-  ProcessoResponse addPartes(Long id, Set<Long> parteIds);
+    ProcessoResponse addPartes(Long id, Set<Long> parteIds);
+
+    ProcessoResponse notificarPartes(Long id);
 }

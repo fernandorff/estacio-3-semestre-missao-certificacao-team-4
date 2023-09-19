@@ -6,6 +6,6 @@ import lombok.Getter;
 @Getter
 public class ProcessoRequest {
 
-  @NotBlank(message = "O campo número não pode estar vazio.")
-  String numero;
+    @NotBlank(message = "O campo número não pode estar vazio.")
+    String numero;
 }

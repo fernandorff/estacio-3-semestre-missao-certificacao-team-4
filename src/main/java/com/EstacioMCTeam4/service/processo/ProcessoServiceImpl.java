@@ -2,93 +2,144 @@ package com.EstacioMCTeam4.service.processo;
 
 import com.EstacioMCTeam4.controller.processo.ProcessoRequest;
 import com.EstacioMCTeam4.controller.processo.ProcessoResponse;
+import com.EstacioMCTeam4.entity.Notificacao;
 import com.EstacioMCTeam4.entity.Parte;
 import com.EstacioMCTeam4.entity.Processo;
+import com.EstacioMCTeam4.entity.enums.TipoNotificacao;
 import com.EstacioMCTeam4.mapper.ProcessoMapper;
+import com.EstacioMCTeam4.repository.NotificacaoRepository;
 import com.EstacioMCTeam4.repository.ProcessoRepository;
 import com.EstacioMCTeam4.service.parte.ParteHelper;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
-public class ProcessoCrudServiceImpl implements ProcessoCrudService {
+public class ProcessoServiceImpl implements ProcessoService {
 
-  private final ProcessoRepository processoRepository;
+    private final ProcessoRepository processoRepository;
 
-  private final ProcessoHelper processoHelper;
+    private final NotificacaoRepository notificacaoRepository;
 
-  private final ParteHelper parteHelper;
+    private final ProcessoHelper processoHelper;
 
-  @Transactional
-  public Set<ProcessoResponse> list() {
+    private final ParteHelper parteHelper;
 
-    return processoRepository.findAll().stream()
-        .map((Processo processo) -> ProcessoMapper.toResponse(processo, true))
-        .collect(Collectors.toSet());
-  }
+    private final JavaMailSender javaMailSender;
 
-  @Transactional
-  public ProcessoResponse getById(Long id) {
+    @Transactional
+    public Set<ProcessoResponse> list() {
 
-    Processo processo = processoHelper.returnValidProcessoById(id);
-    return ProcessoMapper.toResponse(processo, true);
-  }
+        return processoRepository.findAll().stream()
+                .map((Processo processo) -> ProcessoMapper.toResponse(processo, true))
+                .collect(Collectors.toSet());
+    }
 
-  @Transactional
-  public ProcessoResponse create(ProcessoRequest request) {
+    @Transactional
+    public ProcessoResponse getById(Long id) {
 
-    Processo processo = ProcessoMapper.toEntity(request);
+        Processo processo = processoHelper.returnValidProcessoById(id);
+        return ProcessoMapper.toResponse(processo, true);
+    }
 
-    processoRepository.save(processo);
+    @Transactional
+    public ProcessoResponse create(ProcessoRequest request) {
 
-    return ProcessoMapper.toResponse(processo, true);
-  }
+        Processo processo = ProcessoMapper.toEntity(request);
 
-  @Transactional
-  public ProcessoResponse update(Long id, ProcessoRequest request) {
+        processoRepository.save(processo);
 
-    Processo processo = processoHelper.returnValidProcessoById(id);
+        return ProcessoMapper.toResponse(processo, true);
+    }
 
-    ProcessoMapper.updateEntity(processo, request);
+    @Transactional
+    public ProcessoResponse update(Long id, ProcessoRequest request) {
 
-    processoRepository.save(processo);
+        Processo processo = processoHelper.returnValidProcessoById(id);
 
-    return ProcessoMapper.toResponse(processo, true);
-  }
+        ProcessoMapper.updateEntity(processo, request);
 
-  @Transactional
-  public ProcessoResponse delete(Long id) {
+        processoRepository.save(processo);
 
-    Processo processo = processoHelper.returnValidProcessoById(id);
+        return ProcessoMapper.toResponse(processo, true);
+    }
 
-    processoRepository.deleteById(id);
+    @Transactional
+    public ProcessoResponse delete(Long id) {
 
-    return ProcessoMapper.toResponse(processo, true);
-  }
+        Processo processo = processoHelper.returnValidProcessoById(id);
 
-  @Transactional
-  public ProcessoResponse addPartes(Long id, Set<Long> parteIds) {
+        processoRepository.deleteById(id);
 
-    Processo processo = processoHelper.returnValidProcessoById(id);
+        return ProcessoMapper.toResponse(processo, true);
+    }
 
-    Set<Parte> partes = new HashSet<>();
+    @Transactional
+    public ProcessoResponse addPartes(Long id, Set<Long> parteIds) {
 
-    parteIds.forEach(
-        parteId -> {
-          Parte parte = parteHelper.returnValidParteSemProcessoById(parteId);
-          parte.setProcesso(processo);
-          partes.add(parte);
-        });
+        Processo processo = processoHelper.returnValidProcessoById(id);
 
-    processo.getPartes().addAll(partes);
+        Set<Parte> partes = new HashSet<>();
 
-    processoRepository.save(processo);
+        parteIds.forEach(
+                parteId -> {
+                    Parte parte = parteHelper.returnValidParteSemProcessoById(parteId);
+                    parte.setProcesso(processo);
+                    partes.add(parte);
+                });
 
-    return ProcessoMapper.toResponse(processo, true);
-  }
+        processo.getPartes().addAll(partes);
+
+        processoRepository.save(processo);
+
+        return ProcessoMapper.toResponse(processo, true);
+    }
+
+    public ProcessoResponse notificarPartes(Long id) {
+        Processo processo = processoHelper.returnValidProcessoById(id);
+
+        for (Parte parte : processo.getPartes()) {
+            if (parte.getNumeroEndereco() != null && parte.getEnderecoBaseCep().getCep() != null) {
+                Notificacao notificacaoCorreios = new Notificacao();
+
+                notificacaoCorreios.setParte(parte);
+                notificacaoCorreios.setNotificado(true);
+                notificacaoCorreios.setTipoNotificacao(TipoNotificacao.CORREIOS);
+
+                parte.getNotificacoes().add(notificacaoCorreios);
+
+                notificacaoRepository.save(notificacaoCorreios);
+            }
+
+            if (parte.getEmail() != null) {
+                Notificacao notificacaoEmail = new Notificacao();
+
+                notificacaoEmail.setParte(parte);
+                notificacaoEmail.setNotificado(true);
+                notificacaoEmail.setTipoNotificacao(TipoNotificacao.EMAIL);
+
+                parte.getNotificacoes().add(notificacaoEmail);
+
+                notificacaoRepository.save(notificacaoEmail);
+            }
+
+            Notificacao notificacaoDje = new Notificacao();
+
+            notificacaoDje.setParte(parte);
+            notificacaoDje.setNotificado(true);
+            notificacaoDje.setTipoNotificacao(TipoNotificacao.DJE);
+
+            parte.getNotificacoes().add(notificacaoDje);
+
+            notificacaoRepository.save(notificacaoDje);
+        }
+
+        return ProcessoMapper.toResponse(processo, true);
+    }
 }

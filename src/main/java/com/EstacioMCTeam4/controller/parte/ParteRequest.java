@@ -7,21 +7,21 @@ import lombok.Getter;
 @Getter
 public class ParteRequest {
 
-  @NotBlank(message = "O campo NOME não pode estar vazio.")
-  private String nomeCompleto;
+    @NotBlank(message = "O campo NOME não pode estar vazio.")
+    private String nomeCompleto;
 
-  @Pattern(
-      regexp = "\\d{11}|\\d{14}",
-      message = "O campo DOCUMENTO deve conter 11 dígitos (CPF) ou 14 dígitos (CNPJ).")
-  private String documento;
+    @Pattern(
+            regexp = "\\d{11}|\\d{14}",
+            message = "O campo DOCUMENTO deve conter 11 dígitos (CPF) ou 14 dígitos (CNPJ).")
+    private String documento;
 
-  private String email;
+    private String email;
 
-  @Pattern(regexp = "\\d{8}", message = "O campo CEP deve conter 8 dígitos.")
-  private String cep;
+    @Pattern(regexp = "\\d{8}", message = "O campo CEP deve conter 8 dígitos.")
+    private String cep;
 
-  @NotBlank(message = "O campo NUMERO DO ENDEREÇO não pode estar vazio.")
-  private String numeroEndereco;
+    @NotBlank(message = "O campo NUMERO DO ENDEREÇO não pode estar vazio.")
+    private String numeroEndereco;
 
-  private String complementoEndereco;
+    private String complementoEndereco;
 }

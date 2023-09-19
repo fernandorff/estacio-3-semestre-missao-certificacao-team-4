@@ -4,46 +4,48 @@ import com.EstacioMCTeam4.controller.parte.ParteResponse;
 import com.EstacioMCTeam4.controller.processo.ProcessoRequest;
 import com.EstacioMCTeam4.controller.processo.ProcessoResponse;
 import com.EstacioMCTeam4.entity.Processo;
+
 import java.util.Set;
 import java.util.stream.Collectors;
 
 public class ProcessoMapper {
 
-  public static Processo toEntity(ProcessoRequest request) {
+    public static Processo toEntity(ProcessoRequest request) {
 
-    Processo entity = new Processo();
+        Processo entity = new Processo();
 
-    updateEntity(entity, request);
+        updateEntity(entity, request);
 
-    return entity;
-  }
-
-  public static void updateEntity(Processo entity, ProcessoRequest request) {
-
-    entity.setNumero(request.getNumero());
-  }
-
-  public static ProcessoResponse toResponse(Processo entity, boolean mapPartes) {
-
-    if (entity == null) {
-      return null;
+        return entity;
     }
 
-    ProcessoResponse response = new ProcessoResponse();
+    public static void updateEntity(Processo entity, ProcessoRequest request) {
 
-    response.setId(entity.getId());
-    response.setNumero(entity.getNumero());
-
-    if (mapPartes) {
-      Set<ParteResponse> parteResponses =
-          entity.getPartes().stream()
-              .map(parte -> ParteMapper.toResponse(parte, false))
-              .collect(Collectors.toSet());
-      response.setPartes(parteResponses);
+        entity.setNumero(request.getNumero());
     }
 
-    response.setDataHoraCriacao(entity.getDataHoraCriacao());
+    public static ProcessoResponse toResponse(Processo entity, boolean mapPartes) {
 
-    return response;
-  }
+        if (entity == null) {
+            return null;
+        }
+
+        ProcessoResponse response = new ProcessoResponse();
+
+        response.setId(entity.getId());
+        response.setNumero(entity.getNumero());
+
+
+        if (mapPartes && entity.getPartes() != null) {
+            Set<ParteResponse> parteResponses =
+                    entity.getPartes().stream()
+                            .map(parte -> ParteMapper.toResponse(parte, false))
+                            .collect(Collectors.toSet());
+            response.setPartes(parteResponses);
+        }
+
+        response.setDataHoraCriacao(entity.getDataHoraCriacao());
+
+        return response;
+    }
 }

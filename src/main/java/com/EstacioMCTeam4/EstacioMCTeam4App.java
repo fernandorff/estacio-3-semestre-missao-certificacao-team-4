@@ -10,27 +10,27 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @SpringBootApplication
 @OpenAPIDefinition(
-    servers = {@Server(url = "${server.servlet.context-path}", description = "Default Server URL")})
+        servers = {@Server(url = "${server.servlet.context-path}", description = "Default Server URL")})
 public class EstacioMCTeam4App {
 
-  public static void main(String[] args) {
+    public static void main(String[] args) {
 
-    SpringApplication.run(EstacioMCTeam4App.class, args);
-  }
+        SpringApplication.run(EstacioMCTeam4App.class, args);
+    }
 
-  @Bean
-  public WebMvcConfigurer configure() {
+    @Bean
+    public WebMvcConfigurer configure() {
 
-    return new WebMvcConfigurer() {
-      @Override
-      public void addCorsMappings(CorsRegistry registry) {
-        registry
-            .addMapping("/**")
-            .allowedOrigins("*")
-            .allowedMethods("*")
-            .allowedHeaders("*")
-            .allowCredentials(false);
-      }
-    };
-  }
+        return new WebMvcConfigurer() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry
+                        .addMapping("/**")
+                        .allowedOrigins("*")
+                        .allowedMethods("*")
+                        .allowedHeaders("*")
+                        .allowCredentials(false);
+            }
+        };
+    }
 }
