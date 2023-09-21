@@ -36,4 +36,6 @@ Utilize os endpoints `/ecarta` e `/dje` apenas para visualizar, sem registrar o 
 
 ### UML
 
-Diagrama UML do projeto<img src="UML.png">
+Diagrama UML do projeto
+
+<img src="UML.png">
