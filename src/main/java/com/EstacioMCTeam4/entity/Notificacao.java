@@ -1,6 +1,7 @@
 package com.EstacioMCTeam4.entity;
 
 import com.EstacioMCTeam4.entity.enums.TipoNotificacao;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -24,6 +25,7 @@ public class Notificacao {
 
     private TipoNotificacao tipoNotificacao;
 
+    @JsonIgnore
     @ManyToOne
     private Parte parte;
 

@@ -15,6 +15,4 @@ public interface ProcessoController {
     ProcessoResponse delete(Long id);
 
     ProcessoResponse addPartes(Long processoId, Set<Long> parteIds);
-
-    ProcessoResponse notificarPartes(Long processoId);
 }

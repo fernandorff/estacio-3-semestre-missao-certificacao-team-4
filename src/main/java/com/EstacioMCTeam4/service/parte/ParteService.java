@@ -5,7 +5,7 @@ import com.EstacioMCTeam4.controller.parte.ParteResponse;
 
 import java.util.Set;
 
-public interface ParteCrudService {
+public interface ParteService {
 
     Set<ParteResponse> list();
 

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Set;
 
 @RestController
-@RequestMapping("/procesos")
+@RequestMapping("/processos")
 @Tag(name = "Processo", description = "API para gerenciamento de processos")
 @CrossOrigin(origins = "*")
 @RequiredArgsConstructor
@@ -67,12 +67,5 @@ public class ProcessoControllerImpl implements ProcessoController {
             @PathVariable("id") Long processoId, @RequestBody Set<Long> parteIds) {
 
         return processoService.addPartes(processoId, parteIds);
-    }
-
-    @PutMapping("/{id}/notificar-partes")
-    @Operation(summary = "Notificar partes de um processo", method = "PUT")
-    @ResponseStatus(HttpStatus.CREATED)
-    public ProcessoResponse notificarPartes(@PathVariable Long id) {
-        return processoService.notificarPartes(id);
     }
 }

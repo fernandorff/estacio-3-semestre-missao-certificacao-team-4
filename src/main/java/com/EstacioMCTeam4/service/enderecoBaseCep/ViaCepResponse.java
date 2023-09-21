@@ -18,4 +18,6 @@ public class ViaCepResponse {
     private String localidade;
 
     private String uf;
+
+    private boolean erro;
 }

@@ -6,7 +6,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @Getter
 public enum TipoNotificacao {
-    CORREIOS("Correios"),
+    E_CARTA("Correios"),
 
     EMAIL("E-mail"),
 

@@ -18,6 +18,4 @@ public interface ProcessoService {
     ProcessoResponse delete(Long id);
 
     ProcessoResponse addPartes(Long id, Set<Long> parteIds);
-
-    ProcessoResponse notificarPartes(Long id);
 }

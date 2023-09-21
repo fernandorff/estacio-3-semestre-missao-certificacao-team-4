@@ -9,16 +9,17 @@ spring:
       ddl-auto: update
 
   mail:
-    host: smtp.hostinger.com
+    host: smtp.gmail.com
     port: 587
-    username: ensineme@jacksonroberio.com.br
-    password: TJnotifica@mundo3
+    username: time5pje@gmail.com
+    password: jjmcupftcdedgxfy
     properties:
       mail:
         smtp:
           auth: true
           starttls:
             enabled: true
+            required: true
 
 server:
   error:

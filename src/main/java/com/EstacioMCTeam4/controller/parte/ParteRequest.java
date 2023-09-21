@@ -1,6 +1,7 @@
 package com.EstacioMCTeam4.controller.parte;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 
@@ -15,13 +16,19 @@ public class ParteRequest {
             message = "O campo DOCUMENTO deve conter 11 dígitos (CPF) ou 14 dígitos (CNPJ).")
     private String documento;
 
+    // opcional
+    @NotNull
     private String email;
 
-    @Pattern(regexp = "\\d{8}", message = "O campo CEP deve conter 8 dígitos.")
+    // opcional
+    @NotNull
     private String cep;
 
-    @NotBlank(message = "O campo NUMERO DO ENDEREÇO não pode estar vazio.")
+    // opcional
+    @NotNull
     private String numeroEndereco;
 
+    // opcional
+    @NotNull
     private String complementoEndereco;
 }

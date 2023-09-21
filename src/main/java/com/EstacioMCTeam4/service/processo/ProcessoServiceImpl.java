@@ -2,16 +2,13 @@ package com.EstacioMCTeam4.service.processo;
 
 import com.EstacioMCTeam4.controller.processo.ProcessoRequest;
 import com.EstacioMCTeam4.controller.processo.ProcessoResponse;
-import com.EstacioMCTeam4.entity.Notificacao;
 import com.EstacioMCTeam4.entity.Parte;
 import com.EstacioMCTeam4.entity.Processo;
-import com.EstacioMCTeam4.entity.enums.TipoNotificacao;
 import com.EstacioMCTeam4.mapper.ProcessoMapper;
 import com.EstacioMCTeam4.repository.NotificacaoRepository;
 import com.EstacioMCTeam4.repository.ProcessoRepository;
 import com.EstacioMCTeam4.service.parte.ParteHelper;
 import lombok.RequiredArgsConstructor;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,8 +27,6 @@ public class ProcessoServiceImpl implements ProcessoService {
     private final ProcessoHelper processoHelper;
 
     private final ParteHelper parteHelper;
-
-    private final JavaMailSender javaMailSender;
 
     @Transactional
     public Set<ProcessoResponse> list() {
@@ -97,48 +92,6 @@ public class ProcessoServiceImpl implements ProcessoService {
         processo.getPartes().addAll(partes);
 
         processoRepository.save(processo);
-
-        return ProcessoMapper.toResponse(processo, true);
-    }
-
-    public ProcessoResponse notificarPartes(Long id) {
-        Processo processo = processoHelper.returnValidProcessoById(id);
-
-        for (Parte parte : processo.getPartes()) {
-            if (parte.getNumeroEndereco() != null && parte.getEnderecoBaseCep().getCep() != null) {
-                Notificacao notificacaoCorreios = new Notificacao();
-
-                notificacaoCorreios.setParte(parte);
-                notificacaoCorreios.setNotificado(true);
-                notificacaoCorreios.setTipoNotificacao(TipoNotificacao.CORREIOS);
-
-                parte.getNotificacoes().add(notificacaoCorreios);
-
-                notificacaoRepository.save(notificacaoCorreios);
-            }
-
-            if (parte.getEmail() != null) {
-                Notificacao notificacaoEmail = new Notificacao();
-
-                notificacaoEmail.setParte(parte);
-                notificacaoEmail.setNotificado(true);
-                notificacaoEmail.setTipoNotificacao(TipoNotificacao.EMAIL);
-
-                parte.getNotificacoes().add(notificacaoEmail);
-
-                notificacaoRepository.save(notificacaoEmail);
-            }
-
-            Notificacao notificacaoDje = new Notificacao();
-
-            notificacaoDje.setParte(parte);
-            notificacaoDje.setNotificado(true);
-            notificacaoDje.setTipoNotificacao(TipoNotificacao.DJE);
-
-            parte.getNotificacoes().add(notificacaoDje);
-
-            notificacaoRepository.save(notificacaoDje);
-        }
 
         return ProcessoMapper.toResponse(processo, true);
     }
