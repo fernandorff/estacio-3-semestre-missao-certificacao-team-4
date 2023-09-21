@@ -5,10 +5,10 @@ import com.EstacioMCTeam4.controller.processo.ProcessoResponse;
 import com.EstacioMCTeam4.entity.Parte;
 import com.EstacioMCTeam4.entity.Processo;
 import com.EstacioMCTeam4.mapper.ProcessoMapper;
-import com.EstacioMCTeam4.repository.NotificacaoRepository;
 import com.EstacioMCTeam4.repository.ProcessoRepository;
 import com.EstacioMCTeam4.service.parte.ParteHelper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,8 +21,6 @@ import java.util.stream.Collectors;
 public class ProcessoServiceImpl implements ProcessoService {
 
     private final ProcessoRepository processoRepository;
-
-    private final NotificacaoRepository notificacaoRepository;
 
     private final ProcessoHelper processoHelper;
 
@@ -46,6 +44,10 @@ public class ProcessoServiceImpl implements ProcessoService {
     @Transactional
     public ProcessoResponse create(ProcessoRequest request) {
 
+        if (processoRepository.existsByNumero(request.getNumero())) {
+            throw new DataIntegrityViolationException("Processo com esse número já existe");
+        }
+
         Processo processo = ProcessoMapper.toEntity(request);
 
         processoRepository.save(processo);
@@ -57,6 +59,10 @@ public class ProcessoServiceImpl implements ProcessoService {
     public ProcessoResponse update(Long id, ProcessoRequest request) {
 
         Processo processo = processoHelper.returnValidProcessoById(id);
+
+        if (processoRepository.existsByNumero(request.getNumero())) {
+            throw new DataIntegrityViolationException("Processo com esse número já existe");
+        }
 
         ProcessoMapper.updateEntity(processo, request);
 
