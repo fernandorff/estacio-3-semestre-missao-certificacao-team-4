@@ -1,6 +1,8 @@
 # NOTIFICADOR PJE
 
-Missão de certificação do Mundo 3 da Universidade Estácio. Vide documentação SwaggerUI ao subir a aplicação em  http://localhost:8080/
+Missão de certificação do Mundo 3 da Universidade Estácio. 
+
+✨ Vide documentação SwaggerUI ao subir a aplicação em  http://localhost:8080/  ✨ 
 
 ### Fluxo simplificado e exemplificativo de uso da API:
 
