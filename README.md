@@ -17,20 +17,17 @@ spring:
     password: ???????
 ```
 
--  CADASTRAR PARTES
+-  PARTES
 
-Nos endpoints de Parte, faça o cadastro/ inclusão/ exclusão/ alteração da parte. 
+Nos endpoints de Parte, faça o cadastro/inclusão/exclusão/alteração da parte. 
 
-- CADASTRAR PROCESSO JUDICIAL E VINCULAR PARTES
+- PROCESSO JUDICIAL E VINCULAR PARTES
 
-Nos endpoints de Processo, faça o cadastro/ inclusão/ exclusão/ alteração do processo. Utilize o endpoint `/{id}/adicionar-parte/` para associar a parte ao seu respectivo processo, utilizando o ID do processo e um lista de IDs de partes.
+Nos endpoints de Processo, faça o cadastro/inclusão/exclusão/alteração do processo. Utilize o endpoint `/{id}/adicionar-parte/` para associar a parte ao seu respectivo processo, utilizando o ID do processo e um lista de IDs de partes.
 
-- CADASTRAR NOTIFICAÇÕES
+- NOTIFICAÇÕES
 
 Nos endpoints de Notificação, faça o cadastro e visualização das notificações. Utilize o endpoint `/notificar-processo/{processoId}` para registrar solicitação de notificação para todas as partes de um processo, utilizando o ID do processo cadastrado previamente no sistema.
-
-
-- CONSULTAR NOTIFICAÇÕES
 
 Utilize os endpoint `/notificar-e-carta` e `/notificar-dje` para consultar as notificações pendentes e regitrar no sistema seu respectivo processamento pelo E-Carta e pelo DJE.
 
